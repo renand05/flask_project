@@ -3,7 +3,7 @@ from flask import Flask, jsonify
 from flask_restful import Api
 
 from app.common.exceptions import ObjectNotFound, AppExceptionBaseClass
-from app.films.api_v1_0.resources import films_v1_0_bp
+from app.customers.api_v1_0.resources import customers_v1_0_bp
 from .ext import ma, migrate
 
 
@@ -26,7 +26,7 @@ def create_app(settings_env):
     app.url_map.strict_slashes = False
 
     # Registra los blueprints
-    app.register_blueprint(films_v1_0_bp)
+    app.register_blueprint(customers_v1_0_bp)
 
     # Registra manejadores de errores personalizados
     register_error_handlers(app)

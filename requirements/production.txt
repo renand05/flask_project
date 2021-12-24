@@ -6,3 +6,4 @@ flask_marshmallow
 marshmallow-sqlalchemy
 python-dotenv
 psycopg2==2.8.6
+mock
