@@ -1,11 +1,26 @@
-from marshmallow import fields
+from datetime import date, datetime
 
-from app.ext import ma
+import enum
+from pydantic import BaseModel, Field, validator
+
+from app.common import constants
 
 
-class CustomerSchema(ma.Schema):
-    id = fields.Integer(dump_only=True)
-    first_name = fields.String()
-    last_name = fields.String()
-    birth_date = fields.String()
-    email = fields.String()
+class CustomerStatus(enum.Enum):
+    LEAD = "LEAD"
+    PROSPECT = "PROSPECT"
+
+
+class CustomerInputSchema(BaseModel):
+    first_name: str
+    last_name: str
+    birth_date: date
+    email: str = Field(regex=constants.EMAIL_PATTERN)
+    status_code: str = Field(default=CustomerStatus.LEAD.value)
+
+    @validator("birth_date", pre=True)
+    def parse_birth_date(cls, value):
+        return datetime.strptime(value, "%d/%m/%Y").date()
+
+    class Config:
+        use_enum_values = True

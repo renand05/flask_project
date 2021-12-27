@@ -1,21 +1,34 @@
-from app.db import db, BaseModelMixin
+from app.db import BaseModelMixin, db
 
 
 class Customer(db.Model, BaseModelMixin):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
-    birth_date = db.Column(db.String)
+    birth_date = db.Column(db.Date)
     email = db.Column(db.String)
+    status_code = db.Column(db.String)
 
-    def __init__(self, first_name, last_name, birth_date, email):
+    def __init__(self, first_name, last_name, birth_date, email, status_code):
         self.first_name = first_name
         self.last_name = last_name
         self.birth_date = birth_date
         self.email = email
+        self.status_code = status_code
 
     def __repr__(self):
         return f"Customer({self.first_name} {self.last_name})"
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+    def serialize(self):
+        customer_dict = self.serializer()
+        customer_dict["birth_date"] = customer_dict.get("birth_date").strftime(
+            "%d/%m/%Y"
+        )
+        return customer_dict
+
+    @staticmethod
+    def serialize_list(l):
+        return [m.serialize() for m in l]
