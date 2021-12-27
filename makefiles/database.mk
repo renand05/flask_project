@@ -4,6 +4,9 @@
 database.connect: ## Connect to database
 	./manage.py compose exec db psql -Upostgres
 
+database.init: ## Create alembic migration file
+	./manage.py flask db init
+
 database.migrate: ## Create alembic migration file
 	./manage.py flask db migrate
 

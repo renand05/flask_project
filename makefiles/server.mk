@@ -2,7 +2,7 @@
 # ¯¯¯¯¯¯¯¯¯¯¯
 
 server.install: ## Install server with its dependencies
-	./manage.py compose run --rm web pip install -r requirements.txt --user --upgrade --no-warn-script-location
+	./manage.py compose build
 
 server.start: ## Start server in its docker container
 	./manage.py compose up
