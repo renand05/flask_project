@@ -1,13 +1,13 @@
 #! /usr/bin/env python
 
-import os
 import json
-import signal
-import subprocess
-import time
+import os
 
 import click
 import psycopg2
+import signal
+import subprocess
+import time
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 
@@ -41,6 +41,7 @@ def configure_app(config):
     for key, value in config_data.items():
         setenv(key, value)
 
+
 def run_sql(statements):
     conn = psycopg2.connect(
         dbname=os.getenv("POSTGRES_DB"),
@@ -65,6 +66,7 @@ def wait_for_logs(cmdline, message):
         time.sleep(0.1)
         logs = subprocess.check_output(cmdline)
 
+
 def docker_compose_cmdline(commands_string=None):
     config = os.getenv("APPLICATION_CONFIG")
     configure_app(config)
@@ -87,7 +89,6 @@ def docker_compose_cmdline(commands_string=None):
     return command_line
 
 
-
 @click.group()
 def cli():
     pass
@@ -108,7 +109,6 @@ def flask(subcommand):
         p.wait()
 
 
-
 @cli.command(context_settings={"ignore_unknown_options": True})
 @click.argument("subcommand", nargs=-1, type=click.Path())
 def compose(subcommand):
@@ -120,7 +120,6 @@ def compose(subcommand):
     except KeyboardInterrupt:
         p.send_signal(signal.SIGINT)
         p.wait()
-
 
 
 @cli.command()
@@ -148,7 +147,7 @@ def test(filenames):
     wait_for_logs(cmdline, "ready to accept connections")
 
     run_sql([f"CREATE DATABASE {os.getenv('APPLICATION_DB')}"])
-    
+
     cmdline = ["pytest", "-svv", "--cov=app", "--cov-report=term-missing"]
     cmdline.extend(filenames)
     subprocess.call(cmdline)
