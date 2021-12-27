@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.inspection import inspect
 
 db = SQLAlchemy()
 
@@ -11,6 +12,9 @@ class BaseModelMixin:
     def delete(self):
         db.session.delete(self)
         db.session.commit()
+
+    def serializer(self):
+        return {c: getattr(self, c) for c in inspect(self).attrs.keys()}
 
     @classmethod
     def get_all(cls):
