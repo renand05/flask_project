@@ -1,6 +1,11 @@
 version: '3.4'
 
 services:
+  rabbitmq:
+    image: 'rabbitmq:3.6-management-alpine'
+    ports:
+      - '5672:5672'
+      - '15672:15672'
   db:
     image: postgres
     environment:
@@ -11,10 +16,17 @@ services:
       - "${POSTGRES_PORT}:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+  worker:
+    build:
+      context: ${PWD}
+      dockerfile: docker/worker/Dockerfile
+    volumes:
+      - ${PWD}:/opt/code
+    restart: always  
   web:
     build:
       context: ${PWD}
-      dockerfile: docker/Dockerfile
+      dockerfile: docker/app/Dockerfile
     environment:
       FLASK_ENV: ${FLASK_ENV}
       FLASK_CONFIG: ${FLASK_CONFIG}
