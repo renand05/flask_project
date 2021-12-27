@@ -4,3 +4,7 @@ class AppExceptionBaseClass(Exception):
 
 class ObjectNotFound(AppExceptionBaseClass):
     pass
+
+
+class SchemaValidationError(AppExceptionBaseClass):
+    pass
