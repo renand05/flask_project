@@ -2,8 +2,11 @@ flask
 flask_restful
 flask_sqlalchemy
 flask_migrate
-flask_marshmallow
-marshmallow-sqlalchemy
 python-dotenv
-psycopg2==2.8.6
+psycopg2
 mock
+pydantic
+black
+isort
+mypy
+asyncio
