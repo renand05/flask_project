@@ -28,7 +28,6 @@ class CustomerKycClient:
         return random.choice([True, False])
 
     def can_customer_be_prospect(self, result_1, result_2):
-        asyncio.sleep(3)
         if result_1 and result_2:
             return random.choice([True, False])
         return False
@@ -36,7 +35,7 @@ class CustomerKycClient:
     def check_kyc_rules(self):
         tasks = (
             self.is_customer_id_valid_in_national_registry_system(),
-            self.has_customer_any_judicial_records,
+            self.has_customer_any_judicial_records(),
         )
         loop = asyncio.get_event_loop()
         result_1, result_2 = loop.run_until_complete(asyncio.gather(*tasks))
