@@ -1,0 +1,45 @@
+version: '3.4'
+
+services:
+  rabbitmq:
+    image: 'rabbitmq:3.6-management-alpine'
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  worker:
+    build:
+      context: ${PWD}
+      dockerfile: docker/worker/Dockerfile
+    volumes:
+      - ${PWD}:/opt/code
+    restart: always  
+  web:
+    build:
+      context: ${PWD}
+      dockerfile: docker/app/Dockerfile
+    environment:
+      FLASK_ENV: ${FLASK_ENV}
+      FLASK_CONFIG: ${FLASK_CONFIG}
+      APPLICATION_DB: ${APPLICATION_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_HOSTNAME: "db"
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+    command: flask run --host 0.0.0.0
+    volumes:
+      - ${PWD}:/opt/code
+    ports:
+      - "5000:5000"
+
+volumes:
+  pgdata:

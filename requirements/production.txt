@@ -1,0 +1,12 @@
+flask
+flask_restful
+flask_sqlalchemy
+flask_migrate
+python-dotenv
+psycopg2
+mock
+pydantic
+black
+isort
+mypy
+asyncio
