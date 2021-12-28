@@ -4,7 +4,11 @@ _PAYLOAD_SUCCESFUL_REQUEST = {
     "first_name": "Tom",
     "last_name": "Hanks",
     "birth_date": "12/12/1969",
+    "country": "CO",
     "email": "tom@gmail.com",
+    "document_type": "CC",
+    "document_issuing_country": "CO",
+    "document_number": "12345678"
 }
 
 
