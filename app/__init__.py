@@ -2,8 +2,9 @@ import os
 
 from flask import Flask, jsonify
 from flask_restful import Api
+from pydantic.error_wrappers import ValidationError
 
-from app.common.exceptions import AppExceptionBaseClass, ObjectNotFound
+from app.common import exceptions 
 from app.customers.api_v1_0.resources import customers_v1_0_bp
 
 from .ext import migrate
@@ -43,10 +44,15 @@ def register_error_handlers(app):
     def handle_404_error(e):
         return jsonify({"msg": "Not Found error"}), 404
 
-    @app.errorhandler(AppExceptionBaseClass)
+    @app.errorhandler(exceptions.AppExceptionBaseClass)
     def handle_app_base_error(e):
         return jsonify({"msg": str(e)}), 500
 
-    @app.errorhandler(ObjectNotFound)
+    @app.errorhandler(exceptions.ObjectNotFound)
     def handle_object_not_found_error(e):
         return jsonify({"msg": str(e)}), 404
+
+    @app.errorhandler(exceptions.SchemaValidationError)
+    def handle_object_not_found_error(e):
+        return jsonify({"msg": str(e)}), 400
+

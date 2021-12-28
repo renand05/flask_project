@@ -27,8 +27,12 @@ class CustomerResource(Resource):
                 first_name=customer_input.first_name,
                 last_name=customer_input.last_name,
                 birth_date=customer_input.birth_date,
+                country=customer_input.country,
                 email=customer_input.last_name,
                 status_code=customer_input.status_code,
+                document_type=customer_input.document_type,
+                document_issuing_country=customer_input.document_issuing_country,
+                document_number=customer_input.document_number
             )
             customer.save()
             tasks.create_kyc_task(customer=json.dumps(customer.serialize()))
