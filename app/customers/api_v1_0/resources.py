@@ -51,6 +51,7 @@ class CustomerResource(Resource):
         except ValidationError as e:
             raise exceptions.SchemaValidationError(e)
 
+
 api.add_resource(CustomerResource, "/api/v1.0/customer/", endpoint="customer_resources")
 api.add_resource(
     CustomerResource,
