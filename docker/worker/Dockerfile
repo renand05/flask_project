@@ -6,6 +6,7 @@ RUN apt-get update -y && \
 
 RUN pip3 install pika
 RUN pip3 install asyncio
+RUN pip3 install requests
 RUN mkdir /opt/code
 RUN mkdir /opt/requirements
 WORKDIR /opt/code
