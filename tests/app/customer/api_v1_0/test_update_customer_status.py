@@ -1,5 +1,7 @@
-from mock import patch
 import datetime
+
+from mock import patch
+
 from app.customers.models import Customer
 
 _PAYLOAD_SUCCESFUL_REQUEST = {
@@ -14,7 +16,7 @@ _PAYLOAD_INVALID_FORMAT_REQUEST = {}
 _CUSTOMER_MOCK = Customer(
     first_name="Tom",
     last_name="Hanks",
-    birth_date=datetime.datetime(1986,2,19),
+    birth_date=datetime.datetime(1986, 2, 19),
     country="CO",
     status_code="LEAD",
     email="tom@gmail.com",
