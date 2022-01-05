@@ -1,10 +1,7 @@
-import os
-
 from flask import Flask, jsonify
 from flask_restful import Api
-from pydantic.error_wrappers import ValidationError
 
-from app.common import exceptions 
+from app.common import exceptions
 from app.customers.api_v1_0.resources import customers_v1_0_bp
 
 from .ext import migrate
@@ -55,4 +52,3 @@ def register_error_handlers(app):
     @app.errorhandler(exceptions.SchemaValidationError)
     def handle_object_not_found_error(e):
         return jsonify({"msg": str(e)}), 400
-

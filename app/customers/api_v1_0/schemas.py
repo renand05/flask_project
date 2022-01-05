@@ -28,3 +28,14 @@ class CustomerInputSchema(BaseModel):
 
     class Config:
         use_enum_values = True
+
+
+class CustomerKycTaskResultInput(BaseModel):
+    is_customer_id_valid_in_national_registry_system: str
+    has_customer_any_judicial_records: str
+    can_customer_be_prospect: int
+    kyc_final_result: bool = False
+
+    @validator("kyc_final_result", always=True)
+    def are_kyc_results_fulfilled(cls, kyc_final_result, values):
+        return values.get("can_customer_be_prospect") > 0.7
