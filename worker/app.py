@@ -3,8 +3,8 @@ import json
 import asyncio
 import pika
 import random
-import time
 import requests
+import time
 
 sleepTime = 20
 time.sleep(sleepTime)
