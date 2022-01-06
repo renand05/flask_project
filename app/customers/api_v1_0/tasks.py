@@ -1,8 +1,10 @@
 import pika
 
+from app import broker
+
 
 def create_kyc_task(customer):
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host="rabbitmq"))
+    connection = broker.create_conn()
     channel = connection.channel()
     channel.queue_declare(queue="task_queue", durable=True)
     channel.basic_publish(
