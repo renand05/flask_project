@@ -1,6 +1,7 @@
+import pika
 import pytest
 
-from app import create_app
+from app import broker, create_app
 from app.db import db
 
 
@@ -8,6 +9,13 @@ from app.db import db
 def app():
     app = create_app("testing")
     return app
+
+
+@pytest.fixture(scope="function")
+def task_conn(app):
+    with app.app_context():
+        conn = broker.create_conn()
+    yield conn
 
 
 @pytest.fixture(scope="function")
