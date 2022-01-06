@@ -1,18 +1,17 @@
-FROM ubuntu:18.04
+FROM python:3
 
 ENV PYTHONUNBUFFERED 1
-RUN apt-get update -y && \
-    apt-get install -y python3-pip python3-dev
 
-RUN pip3 install pika
-RUN pip3 install asyncio
-RUN pip3 install requests
+RUN pip install pika
+RUN pip install asyncio
+RUN pip install requests
+
 RUN mkdir /opt/code
 RUN mkdir /opt/requirements
 WORKDIR /opt/code
 
-COPY . /opt/code
+ADD requirements /opt/requirements
+RUN pip install -r /opt/requirements/development.txt
 
 ENTRYPOINT ["python3"]
-
 CMD ["worker/app.py"]

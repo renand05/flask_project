@@ -36,6 +36,8 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_PORT: ${POSTGRES_PORT}
     command: flask run --host 0.0.0.0
+    depends_on:
+      - rabbitmq
     volumes:
       - ${PWD}:/opt/code
     ports:
