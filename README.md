@@ -5,6 +5,10 @@ The goal of this project is to demonstrate a possible solution of the take-home-
 
 This API was developed in order to demonstrate how to solve the proposed challenge. The idea followed to solve the task was to develop an API in flask in which customers are created and then through a worker execute the validations needed for KYC purposes. The idea with this approach is to separate the creation of customers from further validations. In this way, we keep api calls fast and we left the complexity of handling request to an external service that will have that as its own responsibility.
 
+### Interact with API
+
+In the following link (https://go.postman.co/workspace/My-Workspace~0a361f66-acb4-4877-83b8-9df6e54a8679/collection/12756371-8203d252-4ed5-47c2-a7da-94014cae3f5c) you can check how to interact with the api and create customers that will be then validated.
+
 ## Table of Contents
 
 1. [Dependencies](#dependencies)
