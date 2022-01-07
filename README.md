@@ -40,7 +40,7 @@ $ make server.install      # Install the pip dependencies on the docker containe
 $ make server.start        # Run the container containing your local python server
 ```
 
-The API runs locally on docker containers. You can easily change the python version you are willing to use [here](https://github.com/antkahn/flask-api-starter-kit/blob/master/docker-compose.yml#L4), by fetching a docker image of the python version you want.
+The API runs locally on docker containers.
 
 ## Commands
 
