@@ -5,6 +5,7 @@ import pika
 import random
 import requests
 import time
+import kyc_request
 
 sleepTime = 20
 time.sleep(sleepTime)
@@ -14,7 +15,7 @@ channel = connection.channel()
 channel.queue_declare(queue="task_queue", durable=True)
 
 loop = asyncio.get_event_loop()
-
+_KYC_CLIENT = kyc_request.KycServicesClient()
 
 class CustomerKycClient:
     def __init__(self, customer_id):
@@ -22,13 +23,11 @@ class CustomerKycClient:
 
     @asyncio.coroutine
     async def is_customer_id_valid_in_national_registry_system(self):
-        await asyncio.sleep(1)
-        return random.choice([True, False])
+        return _KYC_CLIENT.check_customer_id(customer_id=self.customer_id)
 
     @asyncio.coroutine
     async def has_customer_any_judicial_records(self):
-        await asyncio.sleep(5)
-        return random.choice([True, False])
+        return _KYC_CLIENT.check_customer_judicial_records(customer_id=self.customer_id)
 
     def can_customer_be_prospect(self, is_id_valid, has_legal_records):
         random_results = [0.1, 0.5] * 5 + [0.6, 0.7] * 5 + [0.8, 1] * 90
