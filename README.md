@@ -29,7 +29,7 @@ You will need [docker](https://docs.docker.com/engine/installation/) and [docker
 First, clone the project:
 
 ```bash
-$ git clone https://github.com/antkahn/flask-api-starter-kit.git <my-project-name>
+$ git clone https://github.com/renand05/flask_project.git
 $ cd <my-project-name>
 ```
 
@@ -40,7 +40,7 @@ $ make server.install      # Install the pip dependencies on the docker containe
 $ make server.start        # Run the container containing your local python server
 ```
 
-The API runs locally on docker containers. You can easily change the python version you are willing to use [here](https://github.com/antkahn/flask-api-starter-kit/blob/master/docker-compose.yml#L4), by fetching a docker image of the python version you want.
+The API runs locally on docker containers.
 
 ## Commands
 
