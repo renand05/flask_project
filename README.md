@@ -3,7 +3,7 @@ The goal of this project is to demonstrate a possible solution of the take-home-
 
 ## Solution
 
-This API was developed in order to demonstrate how to solve the proposed challenge. The idea followed to solve the task was to develop an API in flask in which customers are created and then through a worker execute the validations needed for KYC purposes. The idea with this approach is to separate the creation of customers from further validations. In this way, we keep api calls fast and we left the complexity of handling request to an external service that will have that as its own responsibility.
+This API was developed in order to demonstrate how to solve the proposed challenge. The idea to solve the task was to develop an API in flask in which customers are created and then through a worker execute the validations needed for KYC purposes. The idea with this approach is to separate the creation of customers from further validations. In this way, we keep api calls fast and we left the complexity of handling request to an external service that will have that as its own responsibility.
 
 ### Interact with API
 
